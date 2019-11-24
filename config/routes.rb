@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
-  get 'cocktails/index'
-  get 'cocktails/new'
-  get 'cocktails/create'
-  get 'cocktails/show'
-  get "cocktails", to: "cocktails#index"
-  get "cocktails/new", to: "cocktails#new"
-  post "cocktails", to: "cocktails#create"
-  get "cocktails/:id", to: "cocktails#show"
-  delete "doses/:id", to: "doses#destroy"
+
+  resources :doses, only: [:destroy]
+
+  resources :cocktails do
+    resources :doses, only: [:create, :new]
+  end
+
+  # get 'cocktails/index'
+  # get 'cocktails/new'
+  # get 'cocktails/create'
+  # get 'cocktails/show'
+  # get "cocktails", to: "cocktails#index"
+  # get "cocktails/new", to: "cocktails#new"
+  # post "cocktails", to: "cocktails#create"
+  # get "cocktails/:id", to: "cocktails#show"
+  # delete "doses/:id", to: "doses#destroy"
 
    # poderia ser asssim - resources: cocktails
 
